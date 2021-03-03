@@ -1,0 +1,51 @@
+﻿@using HMS.MVCHelper
+@model IEnumerable<HMS.Models.DateFormat>
+
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+
+        <div class="modal-header p-0 pb-1">
+            <h5 class="card-title d-inline pt-2">
+                Date Format
+            </h5>
+            <div class="d-inline float-lg-right">
+                @Html.ModelDialog("<i class='fa fa-calendar-day fa-w-20'></i> Create", "Create Format", Url.Action("Create", "DateFormat"))
+            </div>
+        </div>
+
+        <div class="scroll-area-sm">
+            <div class="scrollbar-container ps--active-y ps">
+                <div class="table-responsive table-borderless">
+                    <table class="mb-0 table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.Format)</th>
+                                <th class="text-center">Update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var counter = 0;}
+                            @foreach (var df in ViewBag.DateFormatList)
+                            {
+                                <tr>
+                                    <td>@(++counter)</td>
+                                    <td class="text-center">
+                                        @df.Format
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.EditIconButton("Edit", "DateFormat", routeValues: new { id = df.DF_ID })
+
+                                        @Html.DeleteIconButton("Delete", "DateFormat", routeValues: new { id = df.DF_ID })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

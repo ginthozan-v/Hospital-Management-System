@@ -1,0 +1,44 @@
+﻿@model HMS.ViewModels.SettingViewModel
+
+@{
+    ViewBag.Title = "Settings";
+}
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+
+        @using (Html.BeginForm("Create", "Settings", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="col-4">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title">@ViewBag.Title</h5>
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                        <div class="form-row">
+                            @*@Html.HiddenFor(model => model.)*@
+                            <div class="col-md-12 mb-3">
+                                <label for="validationTooltipUsername"> 
+                                    @Html.LabelFor(model => model.DateFormat)
+                                </label>
+                                <div class="input-group">
+                                    @*@Html.DropDownList("DateFormat", null, htmlAttributes: new { @class = "form-control" })*@
+                                    @Html.DropDownListFor(m => m.DF_ID, (SelectList)ViewBag.DateFormat, htmlAttributes: new { @class = "form-control" })
+
+                                    <small id="emailHelp" class="form-text text-muted">
+                                        @Html.ValidationMessageFor(model => model.DateFormat, "", new { @class = "text-danger" })
+                                    </small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button class="btn btn-primary" type="submit">Update</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

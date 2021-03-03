@@ -1,0 +1,77 @@
+﻿@model HMS.ViewModels.AppointmentViewModel
+
+@using (Html.BeginForm("CreateEdit", "Bloodgroups", FormMethod.Post))
+{
+    <div class="modal-header">
+        <h5 class="card-title">Edit Appointment</h5>
+        @Html.HiddenFor(model => model.Appointment_ID)
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+
+    <div class="modal-body">
+        <div class="form-row">
+            <div class="col-12">
+                <div class="mb-3 text-center">
+                    <h5 class="card-title">Appointment Details</h5>
+                    <p>Patient Name: <span class="font-weight-bold">@Html.DisplayFor(model => model.Patient_Name) </span></p>
+                    <p>Patient Contact: <span class="font-weight-bold">@Html.DisplayFor(model => model.Contact) </span></p>
+                    <p>Disease: <span class="font-weight-bold"> @Html.DisplayFor(model => model.Desease) </span> </p>
+                    <p>Doctor Name: <span class="font-weight-bold"> @Html.DisplayFor(model => model.Doctor_Name) </span></p>
+                    <p>Date:  <span class="font-weight-bold">@Html.DisplayFor(model => model.Appointment_Date)</span></p>
+                    <p>Time: <span class="font-weight-bold">@Html.DisplayFor(model => model.Appointment_Time)</span></p>
+
+
+                    @if (@Model.Appointment_Status == 1)
+                    {
+                        <button class="btn btn-success">Active</button>
+                    }
+                    @if (@Model.Appointment_Status == 2)
+                    {
+                        <button class="btn btn-warning">Waiting</button>
+                    }
+                    @if (@Model.Appointment_Status == 3)
+                    {
+                        <button class="btn btn-danger">Warning</button>
+                    }
+
+                    @*<div class="col-sm-8 row mt-2">
+
+                            <div class="col-md-4 position-relative form-check">
+                                <label class="form-check-label">
+                                    <input name="radio" type="radio" class="form-check-input">
+                                    Available
+                                </label>
+                            </div>
+                            <div class="col-md-4 position-relative form-check">
+                                <label class="form-check-label">
+                                    <input name="radio" type="radio" class="form-check-input">
+                                    Waiting
+                                </label>
+                            </div>
+                            <div class="col-md-4 position-relative form-check disabled">
+                                <label class="form-check-label">
+                                    <input name="radio" type="radio" class="form-check-input">
+                                    Closed
+                                </label>
+                            </div>
+                        </div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        @*<button type="submit" class="btn btn-primary">@(Model.ID == 0 ? "Save" : "Update")</button>*@
+    </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/AjaxSubmit")
+
+
+

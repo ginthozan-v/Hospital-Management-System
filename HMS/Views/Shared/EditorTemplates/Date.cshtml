@@ -1,0 +1,48 @@
+﻿@model System.DateTime?
+
+@{
+    string DateFormat = MvcApplication.DATEFORMAT;
+    var date = Model as DateTime?;
+
+    if ((!date.HasValue || date.Equals(default(DateTime))) && ((bool?)ViewData["nowIfNull"] ?? false))
+
+    {
+        date = DateTime.Now;
+    }
+}
+
+@Html.TextBox("", date == null ? String.Empty : date.Value.ToString(DateFormat), new
+{
+    date_picker = true,
+    @class = "form-control",
+    autocomplete = "off",
+})
+
+<script>
+    $(function () {
+        $.validator.addMethod('date',
+            function (value, element) {
+                if (this.optional(element)) {
+                    return true;
+                }
+                var ok = true;
+                try {
+                    $.datepicker.parseDate('@DateFormat.ToLower().Replace("yyyy", "yy")', value);
+                }
+                catch (err) {
+                    ok = false;
+                }
+                return ok;
+            });
+
+
+        $(":input[date-picker]").datepicker({
+            minDate: new Date(),
+            dateFormat: '@DateFormat.ToLower().Replace("yyyy", "yy")'
+        });
+
+    });
+</script>
+
+
+

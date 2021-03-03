@@ -1,0 +1,27 @@
+﻿<div id="toast-container" class="toast-bottom-right">
+    @if (@TempData["Success"] != null)
+    {
+        @*<div class="toast fade toast-success hide " id="toast" aria-live="polite"><div class="toast-message"></div></div>*@
+        <div class="toast fade toast-success hide" id="toast" aria-live="polite">
+            <div class="toast-title">Success!</div>
+            <div class="toast-message">@TempData["Success"]</div>
+        </div>
+
+    }
+    @if (@TempData["Unsuccess"] != null)
+    {
+        <div class="toast fade toast-error hide " id="toast" aria-live="polite">
+            <div class="toast-title">Error!</div>
+            <div class="toast-message">@TempData["Unsuccess"]</div>
+        </div>
+    }
+    @if (@TempData["Warning"] != null)
+    {
+        <div class="toast fade toast-warning hide" id="toast" aria-live="polite">
+            <div class="toast-title">Warning!</div>
+            <div class="toast-message">@TempData["Warning"]</div>
+        </div>
+    }
+</div>
+
+

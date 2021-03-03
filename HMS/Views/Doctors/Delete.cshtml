@@ -1,0 +1,8 @@
+﻿@model HMS.ViewModels.DoctorViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Doctor_ID)
+    @Html.Partial("_DeleteModal")
+}
+

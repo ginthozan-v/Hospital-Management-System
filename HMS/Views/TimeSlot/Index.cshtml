@@ -1,0 +1,95 @@
+﻿@using HMS.ViewModels;
+@model IEnumerable<TimeSlotViewModel>
+
+@using HMS.MVCHelper
+
+@{
+    ViewBag.Title = "Time Scheduler";
+}
+
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+                        <h4 style="font-weight: 600;">Time Schedule</h4>
+                    </div>
+                </div>
+
+                <div class="page-title-actions">
+                    <div class="d-inline-block dropdown">
+                        @Html.ModelDialog("<i class='fa fa-calendar-day fa-w-20'></i> Schedule", "Schedule", Url.Action("Create", "TimeSlot"))
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <div class="fc fc-bootstrap4 fc-ltr">
+                                <div class="fc-toolbar fc-header-toolbar">
+
+                                    <div class="fc-left">
+                                        <div class="btn-group">
+                                            <button type="button" class="fc-prev-button btn btn-primary disabled" aria-label="prev">
+                                                <span class="fa fa-chevron-left"></span>
+                                            </button>
+                                            <button type="button" class="fc-next-button btn btn-primary" id="dateNext" aria-label="next">
+                                                <span class="fa fa-chevron-right"></span>
+                                            </button>
+                                        </div>
+                                        <button type="button" class="fc-today-button btn btn-primary disabled" disabled="">today</button>
+                                    </div>
+
+                                    <div class="fc-right">
+                                        <div class="btn-group">
+                                            <button type="button" class="fc-listDay-button btn btn-primary active"  id="listDay">list day</button>
+                                            <button type="button" class="fc-listWeek-button btn btn-primary" id="listWeek">list week</button>
+                                            <button type="button" class="fc-month-button btn btn-primary">month</button>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="fc-center text-primary " id="DateTime">
+                                        <h2 class="font-weight-bold"> @DateTime.Now.ToString("dd MMM yyyy") </h2>
+                                    </div>
+                                    <div class="fc-clear"></div>
+
+                                </div>
+
+
+                                <div class="fc-view-container">
+
+                                    @Html.Partial("_todayList")
+                                    @Html.Partial("_weekList")
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

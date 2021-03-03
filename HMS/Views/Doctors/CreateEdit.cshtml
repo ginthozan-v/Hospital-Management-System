@@ -1,0 +1,166 @@
+﻿@model HMS.ViewModels.CreateDoctorViewModel
+
+@using (Html.BeginForm("CreateEdit", "Doctors", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+{
+
+
+    <div class="modal-header">
+        <h5 class="card-title">@(Model.Doctor_ID == 0 ? "Register New Doctor" : "Update Doctor Details")</h5>
+        @Html.HiddenFor(d => d.Doctor_ID)
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Profile Picture <small>(optional)</small></label>
+                    <div>
+                        @*@Html.TextBoxFor(model => model.ProfilePicture, new { type = "file", @class = "form-control-file" })*@
+                        <input type="file" id="ProfilePicture" name="ProfilePicture" class="form-control-file" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.First_Name)</label>
+                    @Html.EditorFor(d => d.First_Name, new { htmlAttributes = new { @class = "form-control", } })
+                    <small id="First_Name" class="form-text text-muted">@Html.ValidationMessageFor(m => m.First_Name, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Last_Name)</label>
+                    @Html.EditorFor(d => d.Last_Name, new { htmlAttributes = new { @class = "form-control", } })
+                    <small id="Last_Name" class="form-text text-muted">@Html.ValidationMessageFor(m => m.Last_Name, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Specialization)</label>
+                    @Html.DropDownListFor(m => m.Specialization_ID, (SelectList)ViewBag.SpclList, "Select Specialization", htmlAttributes: new { @class = "form-control" })
+
+                    <small id="Specialization" class="form-text text-muted"> @Html.ValidationMessageFor(m => m.Specialization_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.BloodGroup)</label>
+                    @Html.DropDownListFor(model => model.Bloodgroup_ID, (SelectList)ViewBag.BloodgroupList, "Select Bloodgroup", htmlAttributes: new { @class = "form-control" })
+                    <small id="Bloodgroup" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Bloodgroup_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Doctor_Gender)</label>
+                    @Html.DropDownListFor(model => model.Gender_ID, (SelectList)ViewBag.GenderList, "Select Gender", htmlAttributes: new { @class = "form-control" })
+                    <small id="Gender" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Gender_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist">@Html.DisplayNameFor(m => m.Doctor_Age)</label>
+                    @Html.EditorFor(d => d.Doctor_Age, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="Age" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Doctor_Age, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist">@Html.DisplayNameFor(m => m.Doctor_Phone)</label>
+                    @Html.EditorFor(d => d.Doctor_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="Phone" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Doctor_Phone, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Email">@Html.DisplayNameFor(m => m.Doctor_Email)</label>
+                    @Html.EditorFor(d => d.Doctor_Email, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="Email" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Doctor_Email, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <h5 class="card-title">Address </h5>
+        @Html.EditorFor(m => m.Address)
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="SaveRecord" class="btn btn-primary">@(Model.Doctor_ID == 0 ? "Save" : "Update")</button>
+    </div>
+
+}
+
+
+@Scripts.Render("~/bundles/jqueryval")
+@*@Scripts.Render("~/Scripts/MyScripts/AjaxSubmitImage.js")*@
+
+<script>
+$("#SaveRecord").click(function (event) {
+    event.preventDefault();
+
+    var _this = $(this);
+    var _form = _this.closest("form");
+    var isvalid = _form.valid();
+
+    var formData = new FormData();
+
+    formData.append("ProfilePicture", $('#ProfilePicture')[0].files[0]);
+
+    var other_data = $('form').serializeArray();
+    $.each(other_data, function (key, input) {
+        formData.append(input.name, input.value);
+    });
+
+    if (isvalid) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CreateEdit")',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result.success) {
+                    $('#divModalShow').modal('hide');
+                    setTimeout(function () {
+                        location.reload();
+                    }, 500);
+                }
+                else {
+                    window.location.href = "Index";
+                }
+            }
+        })
+    }
+});
+</script>
+
+

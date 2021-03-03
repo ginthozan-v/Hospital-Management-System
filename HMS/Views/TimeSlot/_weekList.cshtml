@@ -1,0 +1,43 @@
+﻿@using HMS.ViewModels;
+@model IEnumerable<TimeSlotViewModel>
+
+
+<div class="fc-view fc-listWeek-view fc-list-view card card-primary none" id="listWeekView">
+    <div class="fc-scroller" style="overflow: hidden auto; height: 716px;">
+        <table class="fc-list-table table">
+            <tbody>
+                @foreach (var group in Model.GroupBy(item => item.Date))
+                {
+
+                    <tr class="fc-list-heading">
+                        <td class="table-active" colspan="4">
+                            <a class="fc-list-heading-main"> @Html.Encode(group.Key.DayOfWeek). ( @group.Count() )   </a>
+                            <a class="fc-list-heading-alt">@Html.DisplayName(group.Key.ToShortDateString())</a>
+                        </td>
+                    </tr>
+
+                    foreach (var x in group)
+                    {
+                        int y = x.Hours;
+                        x.EndTime = x.StartTime + TimeSpan.FromHours(y);
+
+                        <tr class="fc-list-item">   
+                            <td class="fc-list-item-time">
+                                @Html.DisplayFor(modelItem => x.StartTime) -
+                                @Html.DisplayFor(modelItem => x.EndTime)
+                            </td>
+                            <td class="fc-list-item-marker">
+                                <span class="fc-event-dot"></span>
+                            </td>
+                            <td class="fc-list-item-title ">
+                                <b>@Html.DisplayFor(modelItem => x.Doctor)</b>
+                                <span style="color: #0394fc">( @Html.DisplayFor(modelItem => x.Specialization) )</span>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

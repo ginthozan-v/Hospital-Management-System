@@ -1,0 +1,71 @@
+﻿@using HMS.ViewModels;
+@model IEnumerable<HospitalViewModel>
+@using HMS.MVCHelper
+
+@{
+    ViewBag.Title = "HMS Hospital";
+}
+
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+                        <h4 style="font-weight: 600;">HMS Hospital</h4>
+
+                    </div>
+
+                </div>
+
+
+                <div class="page-title-actions">
+                    <div class="d-inline-block dropdown">
+                        @Html.ModelDialog("<i class='fa fa-user-plus fa-w-20'></i> Add Hospital", "Add Hospital", Url.Action("Create", "Hospital"))
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="row">
+                <div class="col-md-12">
+
+                    @foreach (var h in Model)
+                    {
+                        <dl class="dl-horizontal">
+
+                            <dt>@Html.LabelFor(modelItem => h.Hospital_Name) </dt>
+                            <dd>@Html.DisplayFor(modelItem => h.Hospital_Name)</dd>
+
+                            <dt>@Html.LabelFor(modelItem => h.Hospital_Address) </dt>
+                            <dd> @Html.DisplayFor(modelItem => h.Hospital_Address) </dd>
+
+                            <dt>@Html.LabelFor(modelItem => h.Hospital_Phone) </dt>
+                            <dd>@Html.DisplayFor(modelItem => h.Hospital_Phone)</dd>
+
+                            <dt>@Html.LabelFor(modelItem => h.Hospital_Email) </dt>
+                            <dd>@Html.DisplayFor(modelItem => h.Hospital_Email)</dd>
+
+
+                            <dd>
+                                @Html.ModelDialogEdit("Edit", "Edit", "Hospital", routeValues: new { id = h.Hospital_ID })
+                                @Html.ModelDialogDelete("Delete", "Delete", "Hospital", routeValues: new { id = h.Hospital_ID })
+
+
+                            </dd>
+                        </dl>
+                    }
+                </div>
+
+
+                <div class="col-md-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

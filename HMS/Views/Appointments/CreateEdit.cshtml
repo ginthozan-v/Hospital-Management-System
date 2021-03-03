@@ -1,0 +1,203 @@
+﻿@model HMS.ViewModels.CreateAppointmentModel
+
+@using (Html.BeginForm("CreateEdit", "Appointments", FormMethod.Post, new { autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+        <h5 class="card-title">@(Model.Appointment_ID == 0 ? "Make Appointment" : "Update Appointment")</h5>
+        @Html.HiddenFor(model => model.Appointment_ID)
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(model => model.Patient_Name)</label>
+                    @Html.DropDownListFor(model => model.Patient_ID, (SelectList)ViewBag.PatientList, "Select Patient", htmlAttributes: new { @class = "form-control" })
+                    <small id="Patient_ID" class="form-text text-muted">  @Html.ValidationMessageFor(model => model.Patient_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist">@Html.DisplayNameFor(model => model.Desease)</label>
+                    @Html.DropDownListFor(model => model.Desease_ID, (SelectList)ViewBag.DeseaseList, "Select Desease", htmlAttributes: new { @class = "form-control" })
+
+                    <small id="Desease_ID" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Desease_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(model => model.Doctor_Name)</label>
+                    @Html.DropDownListFor(model => model.Doctor_ID, (SelectList)ViewBag.DoctorList, "Select Doctor", htmlAttributes: new { @class = "form-control" })
+                    @Html.HiddenFor(model => model.Doctor_ID)
+                    <small id="Doctor_ID" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Doctor_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Status">@Html.DisplayNameFor(model => model.Appointment_Status)</label>
+                    @{
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Waiting",
+                            Value = "2"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Active",
+                            Value = "1"
+
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Cancel",
+                            Value = "3"
+
+                        });
+
+                    }
+
+                    @Html.DropDownListFor(model => model.Appointment_Status, listItems, new { @class = "form-control Appointment_Status", id = "validationCustomSelect" })
+
+                    <small id="Appointment_Status" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Appointment_Status, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Address">@Html.DisplayNameFor(model => model.Appointment_Date_Id)</label>
+                    @Html.DropDownListFor(model => model.Appointment_Date_Id, (SelectList)ViewBag.DateList, "Select Date", htmlAttributes: new { @class = "form-control" })
+                    @Html.HiddenFor(model => model.Appointment_Date_Id)
+                    <small id="Appointment_Date_ID" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Appointment_Date_Id, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Address">@Html.DisplayNameFor(model => model.Appointment_Time)</label>
+                    @Html.EditorFor(model => model.Appointment_Time, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.Appointment_Time)
+                    <small id="Appointment_Time" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Appointment_Time, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">@(Model.Appointment_ID == 0 ? "Save" : "Update")</button>
+    </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/MyScripts/AjaxSubmit.js")
+
+
+
+<script>
+
+//Disable input only on create
+$(document).ready(function () {
+
+        $('#Doctor_ID').prop("readonly", true).prop("disabled", true);
+        $('#Appointment_Date_Id').prop("readonly", true).prop("disabled", true);
+        $('#Appointment_Time').prop("readonly", true).prop("disabled", true);
+
+        if ($('#Appointment_ID').val() == 0) {
+            $('.Appointment_Status').prop("readonly", true).prop("disabled", true);
+        }
+});
+
+//Get Doctor
+$("#Desease_ID").change(function () {
+
+    var DeseaseId = $("#Desease_ID Option:Selected").val();
+
+    $.ajax({
+        url: '@Url.Action("GetDoctor")',
+        type: "POST",
+        dataType: "json",
+        data: { Id: DeseaseId },
+        cache: false,
+        success: function (data) {
+            $("#Doctor_ID").prop("disabled", false).prop("readonly", false);
+            var s = '<option value=""> Select a Doctor</option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option value="' + data[i].Doctor_ID + '">' + data[i].Doctor_Name + '</option>';
+            }
+            $("#Doctor_ID").html(s);
+        }
+    });
+});
+
+
+//GetDate
+$("#Doctor_ID").change(function () {
+
+    var DoctorId = $("#Doctor_ID Option:Selected").val();
+
+    $.ajax({
+        url: '@Url.Action("GetDate")',
+        type: "POST",
+        dataType: "json",
+        data: { Id: DoctorId },
+        cache: false,
+        success: function (data) {
+            $("#Appointment_Date_Id").prop("disabled", false).prop("readonly", false);
+            var s = '<option value=""> Select a Date</option>';
+            for (var i = 0; i < data.length; i++) {
+                s += '<option value="' + data[i].TimeID + '">' + data[i].App_Date + '</option>';
+            }
+        $("#Appointment_Date_Id").html(s);
+        }
+    });
+});
+
+//GetTime
+$("#Appointment_Date_Id").change(function () {
+    var DateId = $("#Appointment_Date_Id Option:Selected").val();
+
+    $.ajax({
+        url: '@Url.Action("GetTime")',
+        type: "POST",
+        dataType: "json",
+        data: { Id: DateId },
+        cache: false,
+        success: function (data) {
+
+            var startTime = data.Hour;
+            var endTime = data.Hour + data.Duration;
+            var interval = data.Interval;
+
+            $("#Appointment_Time").prop("disabled", false).prop("readonly", false);
+            $('#Appointment_Time').timepicker({
+                controlType: 'select',
+                timeFormat: 'hh:mm',
+                oneLine: true,
+                hourMin: startTime,
+                hourMax: endTime,
+                stepMinute: interval,
+            });
+
+            $("#Appointment_Time").html(s);
+        }
+    });
+});
+</script>

@@ -1,0 +1,13 @@
+﻿@model DateTime?
+@{
+
+    string DatFormat = MvcApplication.DATEFORMAT;
+    if (Model.HasValue)
+    {
+        <span>@Model.Value.ToString(DatFormat)</span>
+    }
+    else
+    {
+        <span>-</span>
+    }
+}

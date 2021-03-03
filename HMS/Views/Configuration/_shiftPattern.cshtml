@@ -1,0 +1,52 @@
+﻿@using HMS.MVCHelper
+@model IEnumerable<HMS.ViewModels.ShiftViewModel>
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+
+        <div class="modal-header p-0 pb-1">
+            <h5 class="card-title d-inline pt-2">
+                Shift Pattern
+            </h5>
+            <div class="d-inline float-lg-right">
+                @Html.ModelDialog("<i class='fa fa-clock fa-w-20'></i> Create", "Make Shift", Url.Action("Create", "Configuration"))
+            </div>
+        </div>
+
+        <div class="scroll-area-sm">
+            <div class="scrollbar-container ps--active-y ps">
+                <div class="table-responsive table-borderless">
+                    <table class="mb-0 table">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.Name)</th>
+                                <th class="text-center">@Html.DisplayNameFor(model => model.StartTime)</th>
+                                <th class="text-center">Update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var counter = 0;}
+                            @foreach (var SP in ViewBag.ShiftPatternList)
+                            {
+                                <tr>
+                                    <td>@(++counter)</td>
+                                    <td class="text-center">
+                                        @SP.Name
+                                    </td>
+                                    <td class="text-center">
+                                        @SP.StartTime
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.EditIconButton("Edit", "Configuration", routeValues: new { id = SP.ID })
+                                        @Html.DeleteIconButton("Delete", "Configuration", routeValues: new { id = SP.ID })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

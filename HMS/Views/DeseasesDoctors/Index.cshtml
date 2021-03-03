@@ -1,0 +1,83 @@
+﻿@model IEnumerable<HMS.ViewModels.DeseasesDoctorsViewModel>
+@using HMS.MVCHelper
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+
+                    </div>
+                </div>
+
+
+                <div class="page-title-actions">
+                    <div class="d-inline-block dropdown">
+                        @Html.ModelDialog("<i class='fa fa-user fa-w-20'></i> Assign Doctors", "Assign Doctors", Url.Action("Create", "DeseasesDoctors"))
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Deseases</h5>
+                            <div class="scroll-area-lg">
+                                <div class="scrollbar-container ps--active-y">
+
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>@Html.DisplayNameFor(m => m.Doctor)</th>
+                                                    <th>@Html.DisplayNameFor(m => m.Desease)</th>
+                                                    <th class="text-center">Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                                @foreach (var dd in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td>
+                                                            @dd.Doctor
+                                                        </td>
+                                                        <td>
+                                                            @dd.Desease
+                                                        </td>
+
+                                                        <td class="text-center">
+
+                                                            @Html.ModelDialogEdit("Edit", "Edit", "DeseasesDoctors", routeValues: new { id = dd.dd_ID })
+                                                            @Html.ModelDialogDelete("Delete", "Delete", "DeseasesDoctors", routeValues: new { id = dd.dd_ID })
+
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

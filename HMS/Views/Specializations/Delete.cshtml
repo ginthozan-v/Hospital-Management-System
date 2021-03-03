@@ -1,0 +1,7 @@
+﻿@model HMS.ViewModels.SpecializationViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Specialization_ID)
+    @Html.Partial("_DeleteModal")
+}

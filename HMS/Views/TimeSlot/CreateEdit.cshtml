@@ -1,0 +1,174 @@
+﻿@model HMS.ViewModels.CreateTimeSlotModel
+
+
+<div class="modal-header">
+    <h5 class="card-title">@(Model.TimeID == 0 ? "Create TimeSlot" : "Update Time")</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+@using (Html.BeginForm("CreateEdit", "TimeSlot", FormMethod.Post))
+{
+    <div class="modal-body">
+        <div class="">
+            <div class="text-center text-danger font-weight-bold pb-2">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @TempData["Warning"]
+            </div>
+
+            @Html.HiddenFor(model => model.TimeID)
+        <div class="form-row">
+            <div class="col-4">
+                <div class="form-group">
+
+                    <label for="Doctor_ID">@Html.DisplayNameFor(model => model.Doctor_ID)</label>
+                    @Html.DropDownListFor(m => m.Doctor_ID, (SelectList)ViewBag.DoctorList, "Select Doctor", htmlAttributes: new { @class = "form-control" })
+                    <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Doctor_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="Doctor_ID">@Html.DisplayNameFor(model => model.SID)</label>
+                    @Html.DropDownListFor(m => m.SID, (SelectList)ViewBag.ShiftPatternList, "Select Shift Pattern", htmlAttributes: new { @class = "form-control" })
+                    <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.SID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            @*<div class="col-2">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Duration)</label>
+                    @Html.EditorFor(d => d.Duration, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                    <small id="First_Name" class="form-text text-muted">@Html.ValidationMessageFor(m => m.Duration, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>*@
+
+            <div class="col-2">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Hours)</label>
+                    @Html.EditorFor(d => d.Hours, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                    <small id="First_Name" class="form-text text-muted">@Html.ValidationMessageFor(m => m.Hours, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+
+            <div class="col-2">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Interval)</label>
+                    @Html.EditorFor(d => d.Interval, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                    <small id="First_Name" class="form-text text-muted">@Html.ValidationMessageFor(m => m.Interval, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+            <div class="form-row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="StartDate">@Html.DisplayNameFor(model => model.StartDate)</label>
+                        @Html.EditorFor(model => model.StartDate, new { nowIfNull = true })
+                        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })</small>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="EndDate">@Html.DisplayNameFor(model => model.EndDate)</label>
+                        @Html.EditorFor(model => model.EndDate, new { nowIfNull = true })
+                        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })</small>
+                    </div>
+                </div>
+            </div>
+
+
+            @*<div class="form-row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="StartTime">@Html.DisplayNameFor(model => model.StartTime)</label>
+                            @Html.EditorFor(model => model.StartTime)
+                            <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })</small>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="EndTime">@Html.DisplayNameFor(model => model.EndTime)</label>
+                            @Html.EditorFor(model => model.EndTime)
+                            <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })</small>
+                        </div>
+                    </div>
+                </div>*@
+
+
+            <div class="form-row">
+                <div class="col-12">
+                    <label for="Select Days">Select Days</label>
+                    <div class="position-relative form-group">
+                        <div>
+
+                            <div class="custom-checkbox custom-control custom-control-inline">
+                                @Html.CheckBoxFor(m => m.Mon, new { @class = "custom-control-input" })
+                                <label class="custom-control-label" for="Mon">
+                                    @Html.LabelFor(m => m.Mon)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control custom-control-inline">
+                                @Html.CheckBoxFor(m => m.Tue, new { @class = "custom-control-input" })
+                                <label class="custom-control-label" for="Tue">
+                                    @Html.LabelFor(m => m.Tue)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control custom-control-inline">
+                                @Html.CheckBoxFor(m => m.Wed, new { @class = "custom-control-input" })
+                                <label class="custom-control-label" for="Wed">
+                                    @Html.LabelFor(m => m.Wed)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control custom-control-inline">
+                                @Html.CheckBoxFor(m => m.Thu, new { @class = "custom-control-input" })
+                                <label class="custom-control-label" for="Thu">
+                                    @Html.LabelFor(m => m.Thu)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control custom-control-inline">
+                                @Html.CheckBoxFor(m => m.Fri, new { @class = "custom-control-input" })
+                                <label class="custom-control-label" for="Fri">
+                                    @Html.LabelFor(m => m.Fri)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control custom-control-inline">
+                                @Html.CheckBoxFor(m => m.Sat, new { @class = "custom-control-input" })
+                                <label class="custom-control-label" for="Sat">
+                                    @Html.LabelFor(m => m.Sat)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control custom-control-inline">
+                                @Html.CheckBoxFor(m => m.Sun, new { @class = "custom-control-input" })
+                                <label class="custom-control-label" for="Sun">
+                                    @Html.LabelFor(m => m.Sun)
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">@(Model.TimeID == 0 ? "Save" : "Update")</button>
+    </div>
+
+}
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/MyScripts/AjaxSubmit.js")
+
+

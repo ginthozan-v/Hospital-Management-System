@@ -1,0 +1,106 @@
+﻿@model HMS.ViewModels.CreatePatientViewModel
+
+@using (Html.BeginForm("CreateEdit", "Patients", FormMethod.Post))
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="modal-header">
+        <h5 class="card-title">@(Model.Patient_ID == 0 ? "Register New Patient" : "Update Patient Details")</h5>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Patient_ID)
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+
+    <div class="modal-body">
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Name">@Html.DisplayNameFor(m => m.First_Name)</label>
+                    @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="Patient_Name" class="form-text text-muted">  @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Name">@Html.DisplayNameFor(m => m.Last_Name)</label>
+                    @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="Patient_Name" class="form-text text-muted">  @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist">@Html.DisplayNameFor(m => m.Patient_Phone)</label>
+                    @Html.EditorFor(model => model.Patient_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="Patient_Phone" class="form-text text-muted">   @Html.ValidationMessageFor(model => model.Patient_Phone, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist">@Html.DisplayNameFor(m => m.Patient_Age)</label>
+                    @Html.EditorFor(model => model.Patient_Age, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="Patient_Age" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Patient_Age, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Gender)</label>
+                    @Html.DropDownListFor(model => model.Gender_ID, (SelectList)ViewBag.GenderList, "Select Gender", htmlAttributes: new { @class = "form-control" })
+                    <small id="Gender_ID" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Gender_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Bloodgroup)</label>
+                    @Html.DropDownListFor(model => model.BG_ID, (SelectList)ViewBag.BloodgroupList, "Select Bloodgroup", htmlAttributes: new { @class = "form-control" })
+                    <small id="BG_ID" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.BG_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist">@Html.DisplayNameFor(m => m.Patient_Email) <small>(Optional)</small></label>
+                    @Html.EditorFor(model => model.Patient_Email, new { htmlAttributes = new { @class = "form-control" } })
+
+                    <small id="Patient_Email" class="form-text text-muted">  @Html.ValidationMessageFor(model => model.Patient_Email, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <h5 class="card-title">Address </h5>
+        @Html.EditorFor(m => m.Address)
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">@(Model.Patient_ID == 0 ? "Save" : "Update")</button>
+    </div>
+
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/MyScripts/AjaxSubmit.js")

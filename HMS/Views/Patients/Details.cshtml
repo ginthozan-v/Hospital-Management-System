@@ -1,0 +1,278 @@
+﻿@using HMS.ViewModels;
+@model DetailPatientViewModel
+@using HMS.MVCHelper
+
+@{
+    ViewBag.Title = "Patient Information";
+}
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+                        <h4 style="font-weight: 600;">Patient Information</h4>
+
+                    </div>
+                </div>
+
+                <div class="page-title-actions">
+                    <div class="d-inline-block dropdown">
+                        @*@Html.ModelDialog("<i class='fa fa-user-plus fa-w-20'></i> Register Doctor", "Register Doctor", Url.Action("Create", "Doctors"))*@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 card">
+                            <div class="card-body">
+                                <div class="profile col-lg-12">
+                                    <div class="text-center">
+                                        <img class="rounded-circle" src="@Url.Content("~/Content/Images/ProfilePictures/default.jpg")" alt="">
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <h4>@Html.DisplayFor(m => m.First_Name) @Html.DisplayFor(m => m.Last_Name) </h4>
+                                        <h6>Age @Html.DisplayFor(m => m.Patient_Age)</h6>
+
+                                        @Html.ModelDialogEdit("Update", "Edit", "Patients", routeValues: new { id = @Model.Patient_ID })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+
+                        <div class="main-card mb-3 card">
+                            <div class="card-body">
+                                <h4 class="mb-4">Information: </h4>
+                                <div class="row">
+                                    <div class="col-lg-5 col-5">
+                                        @Html.LabelFor(m => m.Gender) :
+                                    </div>
+
+                                    <div class="col-lg-7 col-7">
+                                        @Html.DisplayFor(m => m.Gender)
+                                    </div>
+
+                                    <div class="col-lg-5 col-5">
+                                        @Html.LabelFor(m => m.Bloodgroup) :
+                                    </div>
+
+                                    <div class="col-lg-7 col-7">
+                                        <div>
+                                            @Html.DisplayFor(m => m.Bloodgroup)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5 col-5">
+                                        @Html.LabelFor(m => m.Patient_Phone) :
+                                    </div>
+
+                                    <div class="col-lg-7 col-7">
+                                        <div>
+                                            @Html.DisplayFor(m => m.Patient_Phone)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5 col-5">
+                                        @Html.LabelFor(m => m.Patient_Email) :
+                                    </div>
+
+                                    <div class="col-lg-7 col-7">
+                                        <div>
+                                            @(Model.Patient_Email == null ? "-" : @Model.Patient_Email)
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="col-lg-5 col-5">
+                                        <div>
+                                            @Html.LabelFor(m => m.Patient_Age) :
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-7 col-7">
+                                        <div>
+                                            @Html.DisplayFor(m => m.Patient_Age)
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-lg-12 col-12">
+                                        @Html.DisplayFor(m => m.Address)
+                                    </div>
+
+                                    <div class="col-lg-5 col-5">
+                                        @Html.LabelFor(m => m.Registered_Date) :
+                                    </div>
+
+                                    <div class="col-lg-7 col-7">
+                                        <div>
+                                            @Html.DisplayFor(m => m.Registered_Date)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="col-lg-12 row">
+                        <div class="col-md-4">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <div class="col-lg-12">
+                                        <div class="text-center">
+                                            <i class="fas fa-heartbeat fa-3x icon-gradient bg-love-kiss"></i>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <h6 class="med-heading">Heart Rate</h6>
+                                            <h4 class="font-weight-bolder">80<small> bpm</small></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 he-100">
+                            <div class="main-card mb-3 card he-50">
+                                <div class="card-body">
+                                    <div class="col-lg-12">
+                                        <div class="text-center">
+                                            <i class="fas fa-thermometer-three-quarters fa-3x icon-gradient bg-love-kiss"></i>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <h6 class="med-heading">Body Temperature</h6>
+                                            <h4 class="font-weight-bolder">36.5<small> c</small></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 he-100">
+                            <div class="main-card mb-3 card he-50">
+                                <div class="card-body">
+                                    <div class="col-lg-12">
+                                        <div class="text-center">
+                                            <i class="fas fa-vial fa-3x icon-gradient bg-love-kiss"></i>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <h6 class="med-heading">Glucose</h6>
+                                            <h4 class="font-weight-bolder">100<small> mg/dl</small></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <h5 class="card-title fsize-1">Test Report</h5>
+
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="test-report">
+                                                    <div class="test-icon">
+                                                        <i class="fas fa-print icon-gradient bg-warning"></i>
+                                                    </div>
+                                                    <div class="test-header">
+                                                        <div class="test-title">CT Scan-Full Body</div>
+                                                        <div class="test-date text-muted font-weight-bold">16th August 2020</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="test-report">
+                                                    <div class="test-icon">
+                                                        <i class="fas fa-print icon-gradient bg-warning"></i>
+                                                    </div>
+                                                    <div class="test-header">
+                                                        <div class="test-title">CT Scan-Full Body</div>
+                                                        <div class="test-date text-muted font-weight-bold">16th August 2020</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="test-report">
+                                                    <div class="test-icon">
+                                                        <i class="fas fa-print icon-gradient bg-warning"></i>
+                                                    </div>
+                                                    <div class="test-header">
+                                                        <div class="test-title">CT Scan-Full Body</div>
+                                                        <div class="test-date text-muted font-weight-bold">16th August 2020</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Prescriptions</h5>
+
+                                    <button class="btn btn-outline-light btn-block pres-btn p-2">Add Prescription</button>
+
+                                    <table class="mb-0 table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th>Prescription</th>
+                                                <th>Date</th>
+                                                <th>Duration</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><i class="fas fa-print mr-2"></i>Mark</td>
+                                                <td>12 August 2020</td>
+                                                <td>3 months</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fas fa-print mr-2"></i> Jacob</td>
+                                                <td>12 August 2020</td>
+                                                <td>3 months</td>
+                                            </tr>
+                                            <tr>
+                                                <td><i class="fas fa-print mr-2"></i> Larry</td>
+                                                <td>12 August 2020</td>
+                                                <td>3 months</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

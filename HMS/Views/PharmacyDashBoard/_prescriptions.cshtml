@@ -1,0 +1,30 @@
+﻿@using HMS.MVCHelper;
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <h5 class="card-title pb-2">Prescriptions</h5>
+        <div class="scroll-area-md">
+            <div class="scrollbar-container ps--active-y ps">
+                @foreach (var item in ViewBag.PrescriptionList)
+                {
+                    <div class="card mb-2 widget-content bg-arielle-smile">
+                        <div class="widget-content-wrapper text-white">
+                            <div class="widget-content-left">
+                                <div class="widget-heading">@item.Patient</div>
+                            </div>
+
+                            <div class="widget-content-right">
+                                <div class="widget-numbers text-white"><span>@item.PrescriptionId</span></div>
+                            </div>
+                            <div class="widget-content-right m-0 p-0">
+                                @Html.DetailLinkPopup("PrescriptionDetails", "PharmacyDashBoard", routeValues: new { id = item.PrescriptionId })
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 300px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 85px;"></div></div>
+            </div>
+        </div>
+    </div>
+</div>

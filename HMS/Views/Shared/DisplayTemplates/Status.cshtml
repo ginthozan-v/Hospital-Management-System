@@ -1,0 +1,30 @@
+﻿@model int?
+
+
+@*Appointment Status*@
+
+@if (Model == 1)
+{
+    <div type="button" class="badge badge-success status-btn" >Active</div>
+}
+else if (Model == 2)
+{
+    <div type="button" class="badge badge-warning status-btn">Waiting</div>
+}
+else if (Model == 3)
+{
+    <div type="button" class="badge badge-danger status-btn">Cancelled</div>
+}
+
+
+@*Doctor Status*@
+
+else if (Model == 4)
+{
+    <div type="button" class="badge badge-success status-btn">Available</div>
+}
+
+else if (Model == 5)
+{
+    <div type="button" class="badge badge-danger status-btn">Not Available</div>
+}

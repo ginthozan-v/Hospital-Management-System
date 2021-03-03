@@ -1,0 +1,21 @@
+﻿@model System.TimeSpan?
+
+@Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new
+{
+    time_picker = true,
+    @class = "form-control",
+    autocomplete = "off"
+})
+
+<script>
+    $(function () {
+        $("#StartTime").timepicker({
+            controlType: 'select',
+            timeFormat: 'HH:mm',
+            oneLine: true,
+            //hourMin: 8,
+            //stepMinute: 15,
+            //hourMax: 16,
+        });
+    });
+</script>

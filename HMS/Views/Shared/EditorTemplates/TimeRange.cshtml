@@ -1,0 +1,19 @@
+﻿@model System.TimeSpan?
+
+@Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new 
+{ 
+    time_picker = true, 
+    @class = "form-control", 
+    autocomplete = "off" 
+})
+
+<script>
+       $(function () {
+        $("#StartTime").timepicker({
+          
+        });
+        $("#EndTime").timepicker({
+
+        });
+    });
+</script>

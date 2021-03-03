@@ -1,0 +1,11 @@
+﻿@model HMS.ViewModels.AddressViewModel
+
+    @Html.LabelFor(m => m.Address)
+    <div>
+        @Html.DisplayFor(m => m.Street), @Html.DisplayFor(m => m.City), @Html.DisplayFor(m => m.Province),  @Html.DisplayFor(m => m.Country)
+    </div>
+    <div></div>
+    <div>
+       
+    </div>
+    <div>@Html.DisplayFor(m => m.Post_Code)</div>

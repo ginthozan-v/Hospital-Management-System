@@ -1,0 +1,484 @@
+﻿@model HMS.ViewModels.CreatePrescriptionViewModel
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+
+<style>
+    textarea#Instruction {
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
+        max-width: 100%;
+        line-height: 1.5;
+        padding: 15px 15px 30px;
+        border-radius: 3px;
+        border: 1px solid #808080;
+    }
+</style>
+
+@using (Html.BeginForm("CreateEdit", "DoctorDashBoard", FormMethod.Post, new { autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+
+        <h5 class="card-title">@(Model.PrescriptionId == 0 ? "Make Prescription" : "Update Prescription")</h5>
+        @Html.HiddenFor(model => model.PrescriptionId)
+        @Html.HiddenFor(model => model.PatientId)
+        @Html.HiddenFor(model => model.DoctorId)
+        @Html.HiddenFor(model => model.AppointmentId)
+        @*@Html.HiddenFor(model => model.)*@
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+
+    </div>
+
+
+    <div class="modal-body">
+        <div id="inst" class="form-row">
+            <div class="col-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="drug"></h5>
+                        <p>@Html.TextAreaFor(m => m.Instruction, new { cols = "60", rows = "1" })</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row mb-3">
+            <div class="col-6">
+                <label for="Specialist"> @Html.DisplayNameFor(model => model.Drug_Name)</label>
+                @Html.EditorFor(model => model.Drug_Name, new { htmlAttributes = new { @class = "form-control" } })
+                <small id="Patient_ID" class="form-text text-muted">  @Html.ValidationMessageFor(model => model.Drug_Name, "", new { @class = "text-danger" })</small>
+            </div>
+            <div class="col-3">
+                <label for="Specialist"> @Html.DisplayNameFor(model => model.Quantity)</label>
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                <small id="Patient_ID" class="form-text text-muted">  @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })</small>
+            </div>
+            <div class="col-3">
+                <label></label>
+                <div class="position-relative form-group">
+                    <div>
+                        <div class="custom-radio custom-control">
+                            @*<input type="radio" id="Card" class="custom-control-input" value="card" name="qty">*@
+                            @Html.RadioButtonFor(model => model.Card, "Card", new { @class = "custom-control-input", @Name="qty"})
+                            <label class="custom-control-label" for="Card">
+                                Card
+                            </label>
+                        </div>
+                        <div class="custom-radio custom-control">
+                            @*<input type="radio" id="Tablet" class="custom-control-input" value="tablet" name="qty">*@
+                            @Html.RadioButtonFor(model => model.Tablet, "Tablet", new { @class = "custom-control-input", @Name="qty"})
+                            <label class="custom-control-label" for="Tablet">
+                                Tablet
+                            </label>
+                        </div>
+                        @Html.HiddenFor(model => model.Qty)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <h5 class="card-title">Instruction</h5>
+        <div class="form-row">
+
+            <div class="col-6">
+                <div class="card-body">
+                    <label class="card-subtitle">Dosage</label>
+                    <div class="position-relative form-group ">
+                        <div>
+                            <div class="input-group justify-content-center">
+                                <span class="Dosageminus">-</span>
+                                @*<input type="number" class="Dosagecnt count" name="Dosageqty" value="1" id="Dosage">*@
+                                @Html.TextBoxFor(model => model.Dosage, new { type = "number", @class = "Dosagecnt count", name = "Dosageqty", @Value = "1", disabled = "disabled" }) Tablet
+
+                                <span class="Dosageplus">+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="card-body">
+                    <label class="card-subtitle">Duration</label>
+                    <div class="position-relative form-group">
+                        <div>
+                            <div class="input-group justify-content-center">
+                                <span class="Durationminus">-</span>
+                                @*<input type="number" class="Duratiocnt count" name="Durationqty" value="1" id="Duration"> Week*@
+                                @Html.TextBoxFor(model => model.Duration, new { type = "number", @class = "Duratiocnt count", name = "Durationqty", @Value = "1", disabled = "disabled" }) Week
+
+                                <span class="Durationplus">+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-12">
+                <div class="card-body">
+                    <label class="card-subtitle">Repeat</label>
+                    <div class="position-relative form-group text-center">
+                        <div>
+                            <div class="custom-radio custom-control custom-control-inline">
+                                <input type="radio" id="Everyday" name="Repeat" class="custom-control-input">
+                                <label class="custom-control-label" for="Everyday">
+                                    Everyday
+                                </label>
+                            </div>
+                            <div class="custom-radio custom-control custom-control-inline">
+                                <input type="radio" id="Alternatedays" name="Repeat" class="custom-control-input">
+                                <label class="custom-control-label" for="Alternatedays">
+                                    Alternate days
+                                </label>
+                            </div>
+                            <div class="custom-radio custom-control custom-control-inline">
+                                <input type="radio" id="Specificdays" name="Repeat" class="custom-control-input">
+                                <label class="custom-control-label" for="Specificdays">
+                                    Specific days
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row" id="AlternatedaysDiv" style="display: none">
+            <div class="col-12">
+                <label for="Select Days">Select Days</label>
+                <div class="position-relative form-group">
+                    <div>
+
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            @Html.CheckBoxFor(m => m.Mon, new { @class = "custom-control-input", @Name = "days", @Value = "Monday" })
+                            <label class="custom-control-label" for="Mon">
+                                @Html.LabelFor(m => m.Mon)
+                            </label>
+                        </div>
+
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            @Html.CheckBoxFor(m => m.Tue, new { @class = "custom-control-input", @Name = "days", @Value = "Tuesday" })
+                            <label class="custom-control-label" for="Tue">
+                                @Html.LabelFor(m => m.Tue)
+                            </label>
+                        </div>
+
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            @Html.CheckBoxFor(m => m.Wed, new { @class = "custom-control-input", @Name = "days", @Value = "Wednesday" })
+                            <label class="custom-control-label" for="Wed">
+                                @Html.LabelFor(m => m.Wed)
+                            </label>
+                        </div>
+
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            @Html.CheckBoxFor(m => m.Thu, new { @class = "custom-control-input", @Name = "days", @Value = "Thursday" })
+                            <label class="custom-control-label" for="Thu">
+                                @Html.LabelFor(m => m.Thu)
+                            </label>
+                        </div>
+
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            @Html.CheckBoxFor(m => m.Fri, new { @class = "custom-control-input", @Name = "days", @Value = "Friday" })
+                            <label class="custom-control-label" for="Fri">
+                                @Html.LabelFor(m => m.Fri)
+                            </label>
+                        </div>
+
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            @Html.CheckBoxFor(m => m.Sat, new { @class = "custom-control-input", @Name = "days", @Value = "Saturday" })
+                            <label class="custom-control-label" for="Sat">
+                                @Html.LabelFor(m => m.Sat)
+                            </label>
+                        </div>
+
+                        <div class="custom-checkbox custom-control custom-control-inline">
+                            @Html.CheckBoxFor(m => m.Sun, new { @class = "custom-control-input", @Name = "days", @Value = "Sunday" })
+                            <label class="custom-control-label" for="Sun">
+                                @Html.LabelFor(m => m.Sun)
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row" id="SpecificdayDiv" style="display: none">
+            <div class="col-6">
+                <label for="Specialist"> @Html.DisplayNameFor(model => model.Specificday)</label>
+                @Html.EditorFor(model => model.Specificday, new { htmlAttributes = new { @class = "form-control" } })
+                <small id="Patient_ID" class="form-text text-muted">  @Html.ValidationMessageFor(model => model.Specificday, "", new { @class = "text-danger" })</small>
+
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="card-body">
+                    <label class="card-subtitle">Time of the day</label>
+                    <div class="position-relative form-group">
+                        <div>
+
+                            <div class="custom-checkbox custom-control">
+                                @Html.CheckBoxFor(m => m.Morning, new { @class = "custom-control-input", @Name = "time", @Value = "Morning" })
+                                <label class="custom-control-label" for="Morning">
+                                    @Html.LabelFor(m => m.Morning)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control">
+                                @Html.CheckBoxFor(m => m.Noon, new { @class = "custom-control-input", @Name = "time", @Value = "Noon" })
+                                <label class="custom-control-label" for="Noon">
+                                    @Html.LabelFor(m => m.Noon)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control">
+                                @Html.CheckBoxFor(m => m.Evening, new { @class = "custom-control-input", @Name = "time", @Value = "Evening" })
+                                <label class="custom-control-label" for="Evening">
+                                    @Html.LabelFor(m => m.Evening)
+                                </label>
+                            </div>
+
+                            <div class="custom-checkbox custom-control">
+                                @Html.CheckBoxFor(m => m.Night, new { @class = "custom-control-input", @Name = "time", @Value = "Night" })
+                                <label class="custom-control-label" for="Night">
+                                    @Html.LabelFor(m => m.Night)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="card-body">
+                    <label class="card-subtitle">To be taken</label>
+                    <div class="position-relative form-group">
+                        <div>
+                            <div class="custom-radio custom-control">
+                                <input type="radio" id="Beforefood" name="Tobetaken" class="custom-control-input">
+                                <label class="custom-control-label" for="Beforefood">
+                                    Before food
+                                </label>
+                            </div>
+                            <div class="custom-radio custom-control">
+                                <input type="radio" id="Afterfood" name="Tobetaken" class="custom-control-input">
+                                <label class="custom-control-label" for="Afterfood">
+                                    After food
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mb-3">
+            <button type="button" class="btn btn-alternate" id="addDrug">Add Drug</button>
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">@(Model.PrescriptionId == 0 ? "Save" : "Update")</button>
+    </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/MyScripts/AjaxSubmit.js")
+
+
+<script>
+
+    $(function () {
+        $("#Alternatedays").click(function () {
+            $("#AlternatedaysDiv").show();
+            $("#SpecificdayDiv").hide();
+        });
+
+        $("#Everyday").click(function () {
+            $("#AlternatedaysDiv").hide();
+            $("#SpecificdayDiv").hide();
+        });
+
+        $("#Specificdays").click(function () {
+            $("#SpecificdayDiv").show();
+            $("#AlternatedaysDiv").hide();
+        });
+    });
+
+    var precriptionData = [];
+
+    function prescriptionDetails(title, instruct) {
+        this.title = title;
+        this.instruct = instruct;
+    }
+
+    document.getElementById("addDrug").addEventListener("click", addPrescription);
+
+    function addPrescription() {
+
+        //Dosage&Duration
+        var dosage = $("#Dosage").val() + " Tablet ";
+        var duration = $("#Duration").val() + " Week ";
+
+        //Days
+        if ($('#Everyday').is(':checked')) {
+            var days = "Every days";
+        }
+        else if ($('#Alternatedays').is(':checked')) {
+
+            var days = [];
+            $.each($("input[name='days']:checked"), function () {
+                days.push($(this).val());
+            });
+            var days = days.join(", ");
+        }
+        else if ($('#Specificdays').is(':checked')) {
+
+            var days = $('#Specificday').val();
+        }
+
+        //Time
+        var time = [];
+        $.each($("input[name='time']:checked"), function () {
+            time.push($(this).val());
+        });
+        var time = time.join(", ");
+
+        //TObeTaken
+        if ($('#Beforefood').is(':checked')) {
+            var taken = "Before food";
+        } else if ($('#Afterfood').is(':checked')) {
+            var taken = "After food";
+        }
+
+                //TObeTaken
+        if ($('#Card').is(':checked')) {
+            var qty = "Card";
+        } else if ($('#Tablet').is(':checked')) {
+            var qty = "Tablet";
+        }
+
+        $('#Qty').val(qty);
+        //Result
+        var drug = $("#Drug_Name").val();
+        var instruction = dosage + " per day for " + duration + " " + days + " in " + time + " " + taken;
+
+        $("#drug").text(drug);
+        $("#Instruction").val(instruction);
+
+        var currentPrescriptionDetails = new prescriptionDetails(drug, instruction);
+        return precriptionData.push(currentPrescriptionDetails);
+
+    };
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<script>
+
+        ////GetInstruction
+        //$("#Drug_Name").keyup(function (event) {
+        //    var drug = $(this).val();
+        //    $("#drug").text(drug);
+        //});
+
+        //$(".Dosageplus").on('click', function () {
+        //    var dosage = Number($("#Dosage").val()) + 1;
+        //    $("#Instruction").val(dosage);
+        //    //$('.Dosagecnt').val(parseInt($('.Dosagecnt').val()) + 1);
+        //});
+
+        //$(".Dosageminus").on('click', function () {
+        //    var dosage = Number($("#Dosage").val()) - 1;
+        //    $("#Instruction").val(dosage);
+        //});
+
+
+
+
+
+    
+    //$(function () {
+
+    //    var prescription = [];
+
+    //    $("#addDrug").click(function () {
+
+    //        //ShowCard
+    //        $("#inst").show();
+    //        //autosize(document.getElementById("Instruction"));
+
+    //        //Dosage&Duration
+    //        var dosage = $("#Dosage").val() + " Tablet ";
+    //        var duration = $("#Duration").val() + " Week ";
+
+    //        //Days
+    //        if ($('#Everyday').is(':checked')) {
+    //            var days = "Every days";
+    //        }
+    //        else if ($('#Alternatedays').is(':checked')) {
+
+    //            var days = [];
+    //            $.each($("input[name='days']:checked"), function () {
+    //                days.push($(this).val());
+    //            });
+    //            var days = days.join(", ");
+    //        }
+    //        else if ($('#Specificdays').is(':checked')) {
+
+    //            var days = $('#Specificday').val();
+    //        }
+
+    //        //Time
+    //        var time = [];
+    //        $.each($("input[name='time']:checked"), function () {
+    //            time.push($(this).val());
+    //        });
+    //        var time = time.join(", ");
+
+    //        //TObeTaken
+    //        if ($('#Beforefood').is(':checked')) {
+    //            var taken = "Before food";
+    //        } else if ($('#Afterfood').is(':checked')) {
+    //            var taken = "After food";
+    //        }
+
+    //        //Result
+    //        var drug = $("#Drug_Name").val();
+    //        var instruction = dosage + " per day for " + duration + " " + days + " in " + time + " " + taken;
+
+    //        $("#drug").text(drug);
+    //        $("#Instruction").val(instruction);
+
+    //    });
+    //});
+    </script>*@

@@ -1,0 +1,58 @@
+﻿@model HMS.ViewModels.WardViewModel
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+        <h5 class="card-title">Update Doctor Details</h5>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.Ward_No)
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+
+    <div class="modal-body">
+
+        <div class="form-row">
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Gender"> @Html.DisplayNameFor(model => model.Ward_Status)</label>
+                    @{
+                        List<SelectListItem> listItems1 = new List<SelectListItem>();
+                        listItems1.Add(new SelectListItem
+                        {
+                            Text = "Available",
+                            Value = "1"
+                        });
+                        listItems1.Add(new SelectListItem
+                        {
+                            Text = "Not Available",
+                            Value = "0"
+                        });
+                    }
+
+
+
+                    @Html.DropDownListFor(model => model.Ward_Status, listItems1, "Status", new { @class = "form-control", id = "validationCustomSelect" })
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </div>
+
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/AjaxSubmit")

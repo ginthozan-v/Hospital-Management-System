@@ -1,0 +1,97 @@
+﻿@model HMS.ViewModels.CreateDoctorViewModel
+
+<div class="modal-header">
+    <h5 class="card-title">Register New Doctor</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body">
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist">@Html.DisplayNameFor(m => m.Doctor_Name)</label>
+                    @Html.TextBoxFor(m => m.Doctor_Name, new { @class = "form-control", id = "exampleInputEmail1", @placeholder = "Doctor Name" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(m => m.Doctor_Name, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Specialization)</label>
+                    @Html.DropDownListFor(m => m.Specialization_ID, (SelectList)ViewBag.SpclList, "--Select Specialization--", htmlAttributes: new { @class = "form-control" })
+
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(m => m.Specialization_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.Doctor_Gender)</label>
+                    @Html.DropDownListFor(model => model.Gender_ID, (SelectList)ViewBag.GenderList, "--Select Gender--", htmlAttributes: new { @class = "form-control" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Gender_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(m => m.BloodGroup)</label>
+                    @Html.DropDownListFor(model => model.Bloodgroup_ID, (SelectList)ViewBag.BloodgroupList, "--Select Bloodgroup--", htmlAttributes: new { @class = "form-control" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Bloodgroup_ID, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Age">@Html.DisplayNameFor(m => m.Doctor_Age)</label>
+                    @Html.TextBoxFor(m => m.Doctor_Age, new { @class = "form-control", id = "validationCustom02", @placeholder = "Age" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Doctor_Age, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Address">@Html.DisplayNameFor(m => m.Doctor_Address)</label>
+                    @Html.TextBoxFor(m => m.Doctor_Address, new { @class = "form-control", id = "exampleInputEmail1", @placeholder = "Address" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Doctor_Address, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Phone">@Html.DisplayNameFor(m => m.Doctor_Phone)</label>
+                    @Html.TextBoxFor(m => m.Doctor_Phone, new { @class = "form-control", id = "exampleInputEmail1", @placeholder = "Phone" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Doctor_Phone, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div ckass="col-6">
+                <div class="form-group">
+                    <label for="Email">@Html.DisplayNameFor(m => m.Doctor_Email)</label>
+                    @Html.TextBoxFor(m => m.Doctor_Email, new { @class = "form-control", id = "validationCustomUsername", @placeholder = "Email" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Doctor_Email, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </div>
+
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/AjaxSubmit")

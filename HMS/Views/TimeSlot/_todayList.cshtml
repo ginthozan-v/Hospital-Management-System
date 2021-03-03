@@ -1,0 +1,50 @@
+﻿<div class="fc-view fc-listDay-view fc-list-view card card-primary" id="listDayView">
+    <div class="fc-view fc-listWeek-view fc-list-view card card-primary">
+        <div id="calendarContent" class="fc-scroller" style="overflow: hidden auto; ">
+
+            <table class="fc-list-table table">
+                <tbody>
+                    <tr class="fc-list-heading">
+                        <td class="table-active" colspan="4">
+                            <a class="fc-list-heading-main"> @DateTime.Today.DayOfWeek  </a>
+                            <a class="fc-list-heading-alt"> @DateTime.Today.ToShortDateString() </a>
+                        </td>
+
+                    </tr>
+
+                    @foreach (var sh in ViewBag.SingleDayList)
+                    {
+                        int y = sh.Hours;
+                        sh.EndTime = sh.StartTime + TimeSpan.FromHours(y);
+
+
+                        <tr class="fc-list-item">
+                            <td class="fc-list-item-time">
+                                @sh.StartTime - @sh.EndTime
+                            </td>
+                            <td class="fc-list-item-marker">
+                                <span class="fc-event-dot"></span>
+                            </td>
+                            <td class="fc-list-item-title ">
+                                @sh.Doctor
+                                <span style="color: #0394fc">( @sh.Specialization )</span>
+                            </td>
+                        </tr>
+                    }
+
+                    @*<tr class="fc-list-item ">
+                        <td class="fc-list-item-time text-center">
+                            NO DATA FOUND !
+                        </td>
+                    </tr>*@
+
+
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

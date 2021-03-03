@@ -1,0 +1,41 @@
+﻿@model HMS.ViewModels.BloodgroupViewModel
+
+
+
+@using (Html.BeginForm())
+{
+
+
+    <div class="modal-header">
+        <h5 class="card-title">Update Bloodgroup</h5>
+        @Html.HiddenFor(model => model.ID)
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(model => model.Bloodgroup)</label>
+                    @Html.EditorFor(model => model.Bloodgroup, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Bloodgroup, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </div>
+
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/AjaxSubmit")
+
+

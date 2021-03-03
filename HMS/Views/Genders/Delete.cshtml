@@ -1,0 +1,8 @@
+﻿@model HMS.ViewModels.GenderViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Gender_ID)
+    @Html.Partial("_DeleteModal")
+}
+

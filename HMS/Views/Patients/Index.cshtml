@@ -1,0 +1,102 @@
+﻿@using HMS.ViewModels;
+@model IEnumerable<PatientViewModel>
+@using HMS.MVCHelper
+
+@{
+    ViewBag.Title = "Patients";
+}
+
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+                        <h4 style="font-weight: 600;">HMS Hospital</h4>
+
+                    </div>
+
+                </div>
+
+
+                <div class="page-title-actions">
+                    <div class="d-inline-block dropdown">
+
+                        @Html.ModelDialog("<i class='fa fa-user-plus fa-w-20'></i> Register Patient", "Register Patient", Url.Action("Create", "Patients"))
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+
+
+
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Patients Details</h5>
+                            <div class="scroll-area-lg">
+                                <div class="scrollbar-container ps--active-y">
+
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        @Html.DisplayNameFor(m => m.First_Name)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(m => m.Bloodgroup)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(m => m.Patient_Phone)
+                                                    </th>
+                                                    <th class="text-center">Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                                @foreach (var p in Model)
+                                                {
+
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => p.First_Name)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => p.Bloodgroup)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => p.Patient_Phone)
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @*@Html.ModelDialogEdit("Edit", "Edit", "Patients", routeValues: new { id = p.Patient_ID })*@
+                                                        @Html.ModelDialogDelete("Delete", "Delete", "Patients", routeValues: new { id = p.Patient_ID })
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @Html.DetailLink("Details", "Patients", routeValues: new { id = p.Patient_ID })
+                                                    </td>
+                                                </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

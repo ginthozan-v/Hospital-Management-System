@@ -1,0 +1,33 @@
+﻿
+
+@{
+    ViewBag.Title = "Configurations";
+}
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+
+        <div class="">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Partial("_shiftPattern")
+                </div>
+                <div class="col-md-5">
+                    @Html.Partial("_dateFormatList")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.Partial("_genderList")
+                </div>
+                <div class="col-md-4">
+                    @Html.Partial("_bloodgroupList")
+                </div>
+                <div class="col-md-4">
+                    @Html.Partial("_specializationList")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

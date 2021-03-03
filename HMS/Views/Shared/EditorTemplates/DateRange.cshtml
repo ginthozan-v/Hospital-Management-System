@@ -1,0 +1,67 @@
+﻿@model System.DateTime?
+
+@{
+    string DateFormat = MvcApplication.DATEFORMAT;
+    var date = Model as DateTime?;
+    if ((!date.HasValue || date.Equals(default(DateTime))) && ((bool?)ViewData["nowIfNull"] ?? false))
+
+    {
+        date = DateTime.Now;
+    }
+}
+
+@Html.TextBox("", date == null ? String.Empty : date.Value.ToString(DateFormat), new
+{
+    date_picker = true,
+    @class = "form-control",
+    autocomplete = "off"
+})
+
+<script>
+    $(function () {
+          $.validator.addMethod('date',
+            function (value, element) {
+                if (this.optional(element)) {
+                    return true;
+                }
+                var ok = true;
+                try {
+                    $.datepicker.parseDate('@DateFormat.ToLower().Replace("yyyy", "yy")', value);
+                }
+                catch (err) {
+                    ok = false;
+                }
+                return ok;
+              });
+
+
+        $("#StartDate").datepicker({
+            dateFormat: '@DateFormat.ToLower().Replace("yyyy", "yy")',
+            minDate: new Date(),
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() + 1);
+                $("#EndDate").datepicker("option", "minDate", dt);
+            }
+        });
+
+        $("#EndDate").datepicker({
+            dateFormat: '@DateFormat.ToLower().Replace("yyyy", "yy")',
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() - 1);
+                $("#StartDate").datepicker("option", "maxDate", dt);
+            }
+        });
+
+    });
+</script>
+
+@*<script>
+        $(document).ready(function () {
+            $(":input[datetime-picker]").datetimepicker({
+                dateFormat: '@DateFormat.ToLower().Replace("yyyy", "yy")',
+                minDate: new Date()
+            });
+        });
+    </script>*@

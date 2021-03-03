@@ -1,0 +1,7 @@
+﻿@model HMS.Models.Ward
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Ward_No)
+    @Html.Partial("_DeleteModal")
+}

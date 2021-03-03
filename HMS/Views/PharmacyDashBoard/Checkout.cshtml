@@ -1,0 +1,151 @@
+﻿@using HMS.ViewModels;
+@model CheckoutViewModel
+
+@{
+    ViewBag.Title = "Billing";
+}
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        @using (Html.BeginForm("Checkout", "PharmacyDashBoard", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    @Html.HiddenFor(m => m.PrescriptionId, new { @Value = @ViewBag.Patient.PrescriptionId })
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title pb-2" style="font-size: 2em">Billing</h5>
+
+                            <div class="position-relative form-group">
+                                <label for="patientName" class="">@Html.DisplayNameFor(m => m.PatientName)</label>
+                                @Html.EditorFor(m => m.PatientName, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.Patient.First_Name, placeholder = @ViewBag.Patient.First_Name } })
+                            </div>
+
+                            <h5 class="card-title pt-4" style="font-size: 1.5em">Payment</h5>
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <div class="card-body">
+                                        <div class="position-relative form-group">
+                                            <div>
+
+                                                <div class="custom-radio custom-control mb-2">
+                                                    @Html.RadioButtonFor(model => model.PaymentOption, "Cash", new {id="Cash", @class = "custom-control-input", @checked = "true"})
+                                                    <label class="custom-control-label" for="Cash">
+                                                        Cash
+                                                    </label>
+
+                                                    <div class="float-lg-right card-color">
+                                                        <i class="fas fa-money-bill-wave"></i>
+                                                    </div>
+                                                </div>
+
+                                                <div class="custom-radio custom-control">
+                                                    @Html.RadioButtonFor(model => model.PaymentOption, "Card", new {id="Card", @class = "custom-control-input" })
+                                                    <label class="custom-control-label" for="Card">
+                                                        Credit Card
+                                                    </label>
+
+                                                    <div class="float-lg-right card-color">
+                                                        <i class="fab fa-cc-mastercard"></i>
+                                                        <i class="fab fa-cc-visa"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row" id="CardSection" style="display: none">
+                                <div class="col-12">
+                                    <div class="position-relative form-group">
+                                        <label for="cardName" class="">Name on card</label>
+                                        @Html.EditorFor(m => m.NameOnCard, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-12 form-row">
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="cardNumber" class="">Card Number</label>
+                                            @Html.EditorFor(m => m.CardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label for="cardName" class="">Exp</label>
+                                            @Html.EditorFor(m => m.EXP, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label for="cardName" class="">CCV</label>
+                                            @Html.EditorFor(m => m.CCV, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                @* Summary *@
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title pb-2" style="font-size: 2em">Summary</h5>
+                            <div class="row">
+                                <div class="col-lg-5 col-5">
+                                    <h6>Drug Name: </h6>
+                                </div>
+
+                                <div class="col-lg-7 col-7 font-weight-bold">
+                                    <h6 class="font-weight-bold pr-0 text-right">@ViewBag.Summary.Drug_Name</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5 col-5">
+                                    <h6>Quantity: </h6>
+                                </div>
+
+                                <div class="col-lg-7 col-7 font-weight-bold">
+                                    <h6 class="font-weight-bold pr-0 text-right">@ViewBag.Summary.Quantity</h6>
+                                </div>
+                            </div>
+
+                            <div class="row mt-5" style="bottom: 0">
+                                <div class="col-lg-5 col-5">
+                                    <h4>Total: </h4>
+                                </div>
+
+                                <div class="col-lg-7 col-7 font-weight-bold">
+                                    <h4 class="font-weight-bold pr-0 text-right ">
+                                        LKR @Html.EditorFor(m => m.Amount, new { htmlAttributes = new { @class = "amount-box", @Value = "500", placeholder = "500" } })
+                                    </h4>
+                                </div>
+                            </div>
+
+                            <button class="mt-1 btn btn-lg btn-block btn-primary float-lg-right">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#Cash").click(function () {
+            $("#CardSection").slideUp();
+        });
+
+        $("#Card").click(function () {
+            $("#CardSection").slideDown();
+        });
+    });
+</script>

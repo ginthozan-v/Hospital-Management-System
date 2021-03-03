@@ -1,0 +1,108 @@
+﻿@model HMS.ViewModels.CreateAppointmentModel
+
+
+@using (Html.BeginForm())
+{
+
+
+    <div class="modal-header">
+        <h5 class="card-title">Update Doctor Details</h5>
+        @Html.HiddenFor(model => model.Appointment_ID)
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(model => model.Patient_Name)</label>
+                    @Html.DropDownListFor(model => model.Patient_ID, (SelectList)ViewBag.PatientList, htmlAttributes: new { @class = "form-control" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Patient_Name, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(model => model.Doctor_Name)</label>
+                    @Html.DropDownListFor(model => model.Doctor_ID, (SelectList)ViewBag.DoctorList, htmlAttributes: new { @class = "form-control" })
+                    <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Doctor_Name, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist">@Html.DisplayNameFor(model => model.Desease)</label>
+                    @Html.DropDownListFor(model => model.Desease_ID, (SelectList)ViewBag.DeseaseList, htmlAttributes: new { @class = "form-control" })
+
+                    <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Desease, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Status">@Html.DisplayNameFor(model => model.Appointment_Status)</label>
+                    @{
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Closed",
+                            Value = "0"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Approved",
+                            Value = "1"
+
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Waiting",
+                            Value = "2",
+                            Selected = true
+                        });
+                    }
+
+
+
+                    @Html.DropDownListFor(model => model.Appointment_Status, listItems, "Status", new { @class = "form-control", id = "validationCustomSelect" })
+
+                    <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Appointment_Status, "", new { @class = "text-danger" })</small>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Address">@Html.DisplayNameFor(model => model.Appointment_Date)</label>
+                    <div class="input-group date" id="requestDateTimePicker" data-target-input="nearest">
+                        @Html.EditorFor(model => model.Appointment_Date, new { htmlAttributes = new { @class = "form-control datetimepicker-input", data_target = "#requestDateTimePicker" } })
+                        <div class="input-group-append" data-target="#requestDateTimePicker" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                    <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Appointment_Date, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </div>
+
+}
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/AjaxSubmit")

@@ -1,0 +1,70 @@
+﻿@using HMS.ViewModels;
+@model IEnumerable<DoctorViewModel>
+@using HMS.MVCHelper
+
+@{
+    ViewBag.Title = "Medical Staffs";
+}
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+                        <h4 style="font-weight: 600;">Medical Staffs</h4>
+
+                    </div>
+                </div>
+
+                <div class="page-title-actions">
+                    <div class="d-inline-block dropdown">
+                        @Html.ModelDialog("<i class='fa fa-user-plus fa-w-20'></i> Register Doctor", "Register Doctor", Url.Action("Create", "Doctors"))
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+
+
+            <div class="row">
+                @foreach (var doc in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+
+                        <div class="mb-3 text-center card card-body doctors-list">
+                            <div class="text-center">
+                                <img class="rounded-circle mb-3" src="@Url.Content("~/Content/Images/ProfilePictures/" + doc.ImagePath)" alt="">
+                            </div>
+
+                            <div class="profile-name">
+                                <h5 class="card-title">@doc.Last_Name @doc.First_Name</h5>
+                                <p class="font-weight-bold text-muted fixed-text">@doc.Specialization</p>
+                            </div>
+
+                           
+
+                            <div class="mb-2">
+                                @Html.DisplayFor(modelItem => doc.Doctor_Status)
+                            </div>
+
+                            <a href="~/Doctors/Details/@doc.Doctor_ID" class="btn btn-danger mb-1">View Doctor</a>
+
+                            @Html.ModelDialogDelete("Delete Doctor", "Delete", "Doctors", routeValues: new { id = @doc.Doctor_ID })
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

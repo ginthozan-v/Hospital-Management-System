@@ -1,0 +1,8 @@
+﻿
+@model HMS.ViewModels.DateFormatViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.DF_ID)
+    @Html.Partial("_DeleteModal")
+}

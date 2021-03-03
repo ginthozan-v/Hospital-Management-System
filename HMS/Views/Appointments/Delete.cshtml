@@ -1,0 +1,8 @@
+﻿@model HMS.ViewModels.CreateAppointmentModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Appointment_ID)
+    @Html.Partial("_DeleteModal")
+}
+

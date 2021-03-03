@@ -1,0 +1,61 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - HMS </title>
+
+    <script src="https://kit.fontawesome.com/a1bd8e00d1.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+<body>
+
+
+
+    @{
+        Html.RenderPartial("_alertmsg");
+    }
+
+    @{
+        Html.RenderPartial("_popupModal");
+    }
+
+
+
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+
+        @{
+            Html.RenderPartial("_Navbar");
+        }
+
+
+        <div class="app-main">
+            @{
+                Html.RenderPartial("_Sidemenu");
+            }
+
+            @RenderBody()
+
+        </div>
+
+
+        @{
+            Html.RenderPartial("_Footer");
+        }
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

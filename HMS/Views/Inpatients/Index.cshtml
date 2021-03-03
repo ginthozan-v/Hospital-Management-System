@@ -1,0 +1,222 @@
+﻿@model IEnumerable<HMS.ViewModels.InpatientViewModel>
+@using HMS.MVCHelper
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    Html.RenderPartial("_alertmsg");
+}
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+                        <h4 style="font-weight: 600;">HMS Hospital</h4>
+
+                    </div>
+
+                </div>
+
+
+                <div class="page-title-actions">
+                    <div class="d-inline-block dropdown">
+                        @Html.ModelDialog("Register Inpatient", Url.Action("Create", "Inpatients"))
+
+                        @*<button type="button" class="btn-shadow btn btn-info btn-create-inpatients">
+                                <span class="btn-icon-wrapper pr-2 opacity-7">
+                                    <i class="fa fa-user-plus fa-w-20"></i>
+                                </span>
+                                Add Inpatient
+                            </button>*@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Addmitted Patients Details</h5>
+                            <div class="scroll-area-lg">
+                                <div class="scrollbar-container ps--active-y">
+
+                                    <div class="table-responsive">
+                                        @*<p>
+                                                @Html.ActionLink("Create New", "Create")
+                                            </p>*@
+
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Patient Name
+                                                    </th>
+                                                    <th>
+                                                        Ward Number
+                                                    </th>
+                                                    <th>
+                                                        Admission Date
+                                                    </th>
+                                                    <th>
+                                                        Discharge Date
+                                                    </th>
+                                                    <th class="text-center">Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                                @foreach (var item in Model)
+                                                {
+                                                    if (@item.DischargeDate == null)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PatientName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.WardNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AdmissionDate)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.DischargeDate)
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <button type="button" class="btn btn-focus edit-btn-inp" data-id="@item.Id"
+                                                                        data-toggle="modal" data-target="#edit-btn-inp">
+                                                                    Discharge
+                                                                </button>
+
+                                                                @*<button type="button" class="btn btn-warning delete-container" data-id="@item.id"
+                                                                            data-toggle="modal" data-target="#delete-container">
+                                                                        Delete
+                                                                    </button>*@
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <h5 class="card-title">Discharged Patients Details</h5>
+                            <div class="scroll-area-lg">
+                                <div class="scrollbar-container ps--active-y">
+
+                                    <div class="table-responsive">
+                                        @*<p>
+                                                @Html.ActionLink("Create New", "Create")
+                                            </p>*@
+
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Patient Name
+                                                    </th>
+                                                    <th>
+                                                        Ward Number
+                                                    </th>
+                                                    <th>
+                                                        Admission Date
+                                                    </th>
+                                                    <th>
+                                                        Discharge Date
+                                                    </th>
+                                                    @*<th class="text-center">Update</th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                                @foreach (var item in Model)
+                                                {
+                                                    if (@item.DischargeDate != null)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.PatientName)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.WardNo)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AdmissionDate)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.DischargeDate)
+                                                            </td>
+                                                            <td class="text-center">
+                                                                @*<button type="button" class="btn btn-focus edit-btn-inp" data-id="@item.id"
+                                                                            data-toggle="modal" data-target="#edit-btn-inp">
+                                                                        Discharge
+                                                                    </button>*@
+
+                                                                @*<button type="button" class="btn btn-warning delete-container" data-id="@item.id"
+                                                                            data-toggle="modal" data-target="#delete-container">
+                                                                        Delete
+                                                                    </button>*@
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Create*@
+<div class="modal fade" id="btn-create-inpatients" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="create-content-inpatient"></div>
+    </div>
+</div>
+
+@*edit*@
+<div class="modal fade" id="edit-btn-inp" tabindex="-1" role="dialog" aria-labelledby="editor-title">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="edit-content-inp"></div>
+    </div>
+</div>
+
+@*delete*@
+<div class="modal fade" id="delete-container" tabindex="-1" role="dialog" aria-labelledby="editor-title">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="delete-content-container"></div>
+    </div>
+</div>
+

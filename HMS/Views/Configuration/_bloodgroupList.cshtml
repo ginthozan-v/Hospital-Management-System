@@ -1,0 +1,50 @@
+﻿@using HMS.MVCHelper
+@model IEnumerable<HMS.ViewModels.BloodgroupViewModel>
+
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+
+        <div class="modal-header p-0 pb-1">
+            <h5 class="card-title d-inline pt-2">
+                Blood Groups
+            </h5>
+            <div class="d-inline float-lg-right">
+                @Html.ModelDialog("<i class='fa fa-tint fa-w-20'></i> Create", "Add Blood Group", Url.Action("Create", "Bloodgroups"))
+            </div>
+        </div>
+
+        <div class="scroll-area-sm">
+            <div class="scrollbar-container ps--active-y ps">
+                <div class="table-responsive table-borderless">
+                    <table class="mb-0 table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>@Html.DisplayNameFor(m => m.Bloodgroup)</th>
+                                <th class="text-center">Update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var counter = 0;}
+                            @foreach (var bg in ViewBag.BloodGroupList)
+                            {
+                                <tr>
+                                    <td>@(++counter)</td>
+                                    <td class="text-center">
+                                        @bg.Bloodgroup
+                                    </td>
+                                    <td class="text-center">
+                                        @Html.EditIconButton("Edit", "Bloodgroups", routeValues: new { id = bg.ID })
+                                        @Html.DeleteIconButton("Delete", "Bloodgroups", routeValues: new { id = bg.ID })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

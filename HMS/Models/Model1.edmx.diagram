@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e3b5ce6eb2bc47e7a46a11ed7a6fd97f" Name="Diagram1">
+        <EntityTypeShape EntityType="HMSModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Appointment" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.AspNetRole" Width="1.5" PointX="5.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.AspNetUser" Width="1.5" PointX="8" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Bloodgroup" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Desease" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Doctor" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Gender" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Hospital" Width="1.5" PointX="10.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Patient" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Specialization" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.sysdiagram" Width="1.5" PointX="10.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HMSModel.Ward" Width="1.5" PointX="13" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="HMSModel.FK_Appointment_Desease" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_Appointment_Doctor" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_Appointment_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_Doctor_Bloodgroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_Patient_Bloodgroup" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_Doctor_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_Doctor_Specialization" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_Patient_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.FK_Ward_Hospital" ManuallyRouted="false" />
+        <AssociationConnector Association="HMSModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

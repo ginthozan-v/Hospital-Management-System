@@ -1,0 +1,7 @@
+﻿@model HMS.ViewModels.ShiftViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.Partial("_DeleteModal")
+}

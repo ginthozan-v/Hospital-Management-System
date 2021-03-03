@@ -1,0 +1,50 @@
+﻿@using HMS.MVCHelper
+@model IEnumerable<HMS.ViewModels.SpecializationViewModel>
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+
+        <div class="modal-header p-0 pb-1">
+            <h5 class="card-title d-inline pt-2">
+                Specializations
+            </h5>
+            <div class="d-inline float-lg-right">
+                @Html.ModelDialog("<i class='fa fa-user-plus fa-w-20'></i> Create", "Add Specialization", Url.Action("Create", "Specializations"))
+            </div>
+        </div>
+
+        <div class="scroll-area-sm">
+            <div class="scrollbar-container ps--active-y ps">
+                <div class="table-responsive table-borderless">
+                    <table class="mb-0 table">
+                        <thead>
+                            <tr class="d-flex">
+                                <th class="col-1">#</th>
+                                <th class="col-6">@Html.DisplayNameFor(m => m.Specialization)</th>
+                                <th class="text-center">Update</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var counter = 0;}
+                            @foreach (var sp in ViewBag.SpecializationList)
+                            {
+                                <tr class="d-flex">
+                                    <td class="col-1">@(++counter)</td>
+                                    <td class="col-6">
+                                        @sp.Specialization
+                                    </td>   
+                                    <td class="text-center">
+                                        @Html.EditIconButton("Edit", "Specializations", routeValues: new { id = sp.Specialization_ID })
+                                        @Html.DeleteIconButton("Delete", "Specializations", routeValues: new { id = sp.Specialization_ID })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

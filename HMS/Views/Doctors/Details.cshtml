@@ -1,0 +1,123 @@
+﻿@using HMS.ViewModels;
+@model DetailDoctorViewModel
+@using HMS.MVCHelper
+
+@{
+    ViewBag.Title = "Medical Staffs";
+}
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+                        <h4 style="font-weight: 600;">Medical Staffs</h4>
+
+                    </div>
+                </div>
+
+                <div class="page-title-actions">
+                    <div class="d-inline-block dropdown">
+                        @*@Html.ModelDialog("<i class='fa fa-user-plus fa-w-20'></i> Register Doctor", "Register Doctor", Url.Action("Create", "Doctors"))*@
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="profile col-lg-4">
+                                        <div class="text-center">
+                                            <img class="rounded-circle" src="@Url.Content("~/Content/Images/ProfilePictures/" + @Model.ImagePath)" alt="">
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <h4>@Html.DisplayFor(m => m.Last_Name) @Html.DisplayFor(m => m.First_Name)</h4>
+                                            <h6>@Html.DisplayFor(m => m.Specialization)</h6>
+
+                                            @Html.DisplayFor(m => m.Doctor_Status)
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <h4 class="mb-4">Information</h4>
+                                        <div class="row mb-4">
+
+                                            <div class="col-lg-4 col-6">
+                                                @Html.LabelFor(m => m.Doctor_Email)
+                                                <div>
+                                                    @Html.DisplayFor(m => m.Doctor_Email)
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-6">
+                                                @Html.LabelFor(m => m.Doctor_Phone)
+                                                <div>
+                                                    @Html.DisplayFor(m => m.Doctor_Phone)
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-6">
+                                                @Html.DisplayFor(m => m.Address)
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4 col-6">
+                                                @Html.LabelFor(m => m.Bloodgroup)
+                                                <div>
+                                                    @Html.DisplayFor(m => m.Bloodgroup)
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-6">
+                                                @Html.LabelFor(m => m.Gender)
+                                                <div>
+                                                    @Html.DisplayFor(m => m.Gender)
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-6">
+                                                @Html.LabelFor(m => m.Registered_Date)
+                                                <div>
+                                                    @Html.DisplayFor(m => m.Registered_Date)
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="mt-4 mr-0 float-right">
+                                            @Html.ModelDialogEdit("Edit", "Edit", "Doctors", routeValues: new { id = @Model.Doctor_ID })
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

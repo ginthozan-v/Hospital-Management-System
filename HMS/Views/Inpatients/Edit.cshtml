@@ -1,0 +1,63 @@
+﻿@model HMS.Models.Inpatient
+
+<div class="modal-content">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="modal-header">
+            <h5 class="card-title">Discharge Patient</h5>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+
+        <div class="modal-body">
+
+            <div class="form-row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="Name">Patient Name</label>
+                        @Html.DropDownList("patientsId", null, htmlAttributes: new { @class = "form-control" })
+                        <small id="emailHelp" class="form-text text-muted">
+                            @Html.ValidationMessageFor(model => model.patientsId, "", new { @class = "text-danger" })
+                        </small>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="Specialist">Ward No</label>
+                        @Html.DropDownList("Ward_No", null, htmlAttributes: new { @class = "form-control" })
+                        <small id="emailHelp" class="form-text text-muted"> @Html.ValidationMessageFor(model => model.Ward_No, "", new { @class = "text-danger" })</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="example-date-input">Discharge Date</label>
+                        @Html.EditorFor(model => model.DischargeDate, new { htmlAttributes = new { @class = "form-control datepicker", type = "date", id = "example-date-input" } })
+                        <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.DischargeDate, "", new { @class = "text-danger" })</small>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+
+    }
+</div>
+@Scripts.Render("~/bundles/AjaxSubmit")

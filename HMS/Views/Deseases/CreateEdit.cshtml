@@ -1,0 +1,38 @@
+﻿
+@model HMS.ViewModels.DeseaseViewModel
+
+@using (Html.BeginForm("CreateEdit", "Deseases", FormMethod.Post))
+{
+
+
+    <div class="modal-header">
+        <h5 class="card-title">@(Model.Desease_ID == 0 ? "Create Desease" : "Edit Desease")</h5>
+        @Html.HiddenFor(model => model.Desease_ID)
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="Specialist"> @Html.DisplayNameFor(model => model.Desease)</label>
+                    @Html.EditorFor(model => model.Desease, new { htmlAttributes = new { @class = "form-control" } })
+                    <small id="emailHelp" class="form-text text-muted">@Html.ValidationMessageFor(model => model.Desease, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">@(Model.Desease_ID == 0 ? "Save" : "Update")</button>
+    </div>
+
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/MyScripts/AjaxSubmit.js")

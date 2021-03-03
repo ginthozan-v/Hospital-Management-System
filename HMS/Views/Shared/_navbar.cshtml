@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    <div class="app-header header-shadow bg-happy-fisher header-text-dark">
+        <div class="app-header__logo">
+            <div class="">
+                @*<img src="@Url.Content("~/Content/Images/logo-inverse.png")" alt="logo">*@
+                <h2 class="font-weight-bolder text-black-50">H M S</h2>
+            </div>
+            <div class="header__pane ml-auto">
+                <div>
+                    <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                            data-class="closed-sidebar">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="app-header__mobile-menu">
+            <div>
+                <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="app-header__menu">
+            <span>
+                <button type="button"
+                        class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                    <span class="btn-icon-wrapper">
+                        <i class="fa fa-ellipsis-v fa-w-6"></i>
+                    </span>
+                </button>
+            </span>
+        </div>
+        <div class="app-header__content">
+            <div class="app-header-left">
+                <div class="search-wrapper">
+                    <div class="input-holder">
+                        <input type="text" class="search-input" placeholder="Type to search">
+                        <button class="search-icon"><span></span></button>
+                    </div>
+                    <button class="close"></button>
+                </div>
+                @if (User.IsInRole("Admin"))
+                {
+                <ul class="header-menu nav">
+                    <li class="dropdown nav-item">
+                        <a href="~/Settings/Index" class="nav-link">
+                            <i class="nav-link-icon fa fa-cog"></i>
+                            Setting
+                        </a>
+                    </li>
+                </ul>
+                }
+
+            </div>
+
+            @{
+                Html.RenderPartial("_LoginPartial");
+            }
+
+        </div>
+    </div>
+}
